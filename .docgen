@@ -1,0 +1,2 @@
+#trick
+godoc -http=:6060 & wget -e robots=off -p -k -r --no-parent -P doc -m "http://localhost:6060/pkg/github.com/upwork/golang-upwork/"
