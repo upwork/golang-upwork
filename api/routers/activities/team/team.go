@@ -74,7 +74,7 @@ func (r a) UpdateBatch(company string, params map[string]string) (*http.Response
 // Get by type 
 func getByType(company string, team string, code string) (*http.Response, []byte) {
     var r a
-    url := "";
+    url := ""
     if code != "" {
         url = "/" + code;
     }
