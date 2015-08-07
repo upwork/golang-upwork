@@ -12,7 +12,7 @@
 // Author::    Maksym Novozhylov (mnovozhilov@upwork.com)
 // Copyright:: Copyright 2015(c) Upwork.com
 // License::   See LICENSE.txt and TOS - https://developers.upwork.com/api-tos.html
-package auth
+package workdiary
 
 import (
     "net/http"
@@ -36,7 +36,12 @@ func New(c api.ApiClient) (a) {
     return r
 }
 
-// Get user info
-func (r a) GetUserInfo() (*http.Response, []byte) {
-    return r.client.Get("/auth/v1/info", nil)
+// Get Workdiary
+func (r a) Get(company string, username string, date string, params map[string]string) (*http.Response, []byte) {
+    return r.client.Get("/team/v1/workdiaries/" + company + "/" + username + "/" + date, params)
+}
+
+// Get Workdiary by Contract
+func (r a) GetByContract(contract string, date string, params map[string]string) (*http.Response, []byte) {
+    return r.client.Get("/team/v2/workdiaries/contracts/" + contract + "/" + date, params)
 }

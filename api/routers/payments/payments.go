@@ -12,7 +12,7 @@
 // Author::    Maksym Novozhylov (mnovozhilov@upwork.com)
 // Copyright:: Copyright 2015(c) Upwork.com
 // License::   See LICENSE.txt and TOS - https://developers.upwork.com/api-tos.html
-package auth
+package payments
 
 import (
     "net/http"
@@ -36,7 +36,7 @@ func New(c api.ApiClient) (a) {
     return r
 }
 
-// Get user info
-func (r a) GetUserInfo() (*http.Response, []byte) {
-    return r.client.Get("/auth/v1/info", nil)
+// Submit a Custom Payment
+func (r a) SubmitBonus(teamReference string, params map[string]string) (*http.Response, []byte) {
+    return r.client.Post("/hr/v2/teams/" + teamReference + "/adjustments", params)
 }

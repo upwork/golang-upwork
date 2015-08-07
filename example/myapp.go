@@ -56,7 +56,7 @@ func main() {
     }
 
     // http.Response and []byte will be return, you can use any
-    _, jsonDataFromHttp1 := auth.New(client).GetUserInfo(nil)
+    _, jsonDataFromHttp1 := auth.New(client).GetUserInfo()
     
     // here you can Unmarshal received json string, or do any other action(s)
     fmt.Println(string(jsonDataFromHttp1))

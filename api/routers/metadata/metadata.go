@@ -12,7 +12,7 @@
 // Author::    Maksym Novozhylov (mnovozhilov@upwork.com)
 // Copyright:: Copyright 2015(c) Upwork.com
 // License::   See LICENSE.txt and TOS - https://developers.upwork.com/api-tos.html
-package auth
+package metadata
 
 import (
     "net/http"
@@ -36,7 +36,32 @@ func New(c api.ApiClient) (a) {
     return r
 }
 
-// Get user info
-func (r a) GetUserInfo() (*http.Response, []byte) {
-    return r.client.Get("/auth/v1/info", nil)
+// Get categories
+func (r a) GetCategories() (*http.Response, []byte) {
+    return r.client.Get("/profiles/v1/metadata/categories", nil)
+}
+
+// Get categories (V2)
+func (r a) GetCategoriesV2() (*http.Response, []byte) {
+    return r.client.Get("/profiles/v2/metadata/categories", nil)
+}
+
+// Get skills
+func (r a) GetSkills() (*http.Response, []byte) {
+    return r.client.Get("/profiles/v1/metadata/skills", nil)
+}
+
+// Get regions
+func (r a) GetRegions() (*http.Response, []byte) {
+    return r.client.Get("/profiles/v1/metadata/regions", nil)
+}
+
+// Get tests
+func (r a) GetTests() (*http.Response, []byte) {
+    return r.client.Get("/profiles/v1/metadata/tests", nil)
+}
+
+// Get reasons
+func (r a) GetReasons(params map[string]string) (*http.Response, []byte) {
+    return r.client.Get("/profiles/v1/metadata/reasons", params)
 }

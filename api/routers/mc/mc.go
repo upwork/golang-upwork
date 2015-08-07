@@ -36,6 +36,42 @@ func New(c api.ApiClient) (a) {
     return r
 }
 
+// Get trays
+func (r a) GetTrays() (*http.Response, []byte) {
+    return r.client.Get("/mc/v1/trays", nil)
+}
+
+// Get tray by type
+func (r a) GetTrayByType(username string, tType string) (*http.Response, []byte) {
+    return r.client.Get("/mc/v1/trays/" + username + "/" + tType, nil)
+}
+
+// List thread details based on thread id
+func (r a) GetThreadDetails(username string, threadId string, params map[string]string) (*http.Response, []byte) {
+    return r.client.Get("/mc/v1/threads/" + username + "/" + threadId, params)
+}
+
+// Get a specific thread by "Interview" context
+func (r a) GetThreadByContext(username string, jobKey string, applicationId string, context string, params map[string]string) (*http.Response, []byte) {
+    if context == "" {
+        context = "Interviews"
+    }
+    return r.client.Get("/mc/v1/contexts/" + username + "/" + context + ":" + jobKey + ":" + applicationId, params)
+}
+
+// Get a specific thread by "Interview" context
+func (r a) GetThreadByContextLastPosts(username string, jobKey string, applicationId string, context string, params map[string]string) (*http.Response, []byte) {
+    if context == "" {
+        context = "Interviews"
+    }
+    return r.client.Get("/mc/v1/contexts/" + username + "/" + context + ":" + jobKey + ":" + applicationId + "/last_posts", params)
+}
+
+// Send new message
+func (r a) StartNewThread(username string, params map[string]string) (*http.Response, []byte) {
+    return r.client.Post("/mc/v1/threads/" + username, params)
+}
+
 // Reply to existent thread
 func (r a) ReplyToThread(username string, threadId string, params map[string]string) (*http.Response, []byte) {
     return r.client.Post("/mc/v1/threads/" + username + "/" + threadId, params)

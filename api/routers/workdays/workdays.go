@@ -12,7 +12,7 @@
 // Author::    Maksym Novozhylov (mnovozhilov@upwork.com)
 // Copyright:: Copyright 2015(c) Upwork.com
 // License::   See LICENSE.txt and TOS - https://developers.upwork.com/api-tos.html
-package auth
+package workdays
 
 import (
     "net/http"
@@ -36,7 +36,12 @@ func New(c api.ApiClient) (a) {
     return r
 }
 
-// Get user info
-func (r a) GetUserInfo() (*http.Response, []byte) {
-    return r.client.Get("/auth/v1/info", nil)
+// Get Workdays by Company
+func (r a) GetByCompany(company string, fromDate string, tillDate string, params map[string]string) (*http.Response, []byte) {
+    return r.client.Get("/team/v2/workdays/companies/" + company + "/" + fromDate + "," + tillDate, params)
+}
+
+// Get Workdays by Contract
+func (r a) GetByContract(contract string, fromDate string, tillDate string, params map[string]string) (*http.Response, []byte) {
+    return r.client.Get("/team/v2/workdays/contracts/" + contract + "/" + fromDate + "," + tillDate, params)
 }
