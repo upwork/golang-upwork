@@ -37,6 +37,6 @@ func New(c api.ApiClient) (a) {
 }
 
 // Search freelancers
-func (r a) find(params map[string]string) (*http.Response, []byte) {
+func (r a) Find(params map[string]string) (*http.Response, []byte) {
     return r.client.Get("/profiles/v2/search/providers", params)
 }
