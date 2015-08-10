@@ -59,16 +59,13 @@ for applications that are not web-based applications.
 
 ## Installation
 1.
-Get `go get github.com/mnovozhylov/oauth`
+Get `go get -u github.com/upwork/golang-upwork/api`
 
 2.
-Get `go get github.com/upwork/golang-upwork`
-
-3.
 Open `myapp.go` and type the consumerKey and consumerSecret that you previously got from the API Center,
 or use `config.json` file to configure your application.
 
-4.
+3.
 Compile using GO compilator. (for more details visit http://golang.org)
 
 ***That's all. Run your app as `myapp` and have fun.***
