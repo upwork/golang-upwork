@@ -18,6 +18,7 @@ import (
     "fmt"
     "bufio"
     "os"
+    //"net/http" //uncomment if you need to setup a custom http client
     
     "github.com/upwork/golang-upwork/api"
     "github.com/upwork/golang-upwork/api/routers/auth"
