@@ -38,6 +38,12 @@ func main() {
     config := api.ReadConfig(cfgFile)
     config.Print()
 */
+/* it is possible to setup a custom http client if needed
+    c := &http.Client{}
+    config := api.ReadConfig(cfgFile)
+    config.SetCustomHttpClient(c)
+    client := api.Setup(config)
+*/
     
     client := api.Setup(api.ReadConfig(cfgFile))
     // we need an access token/secret pair in case we haven't received it yet

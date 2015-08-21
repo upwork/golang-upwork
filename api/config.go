@@ -19,6 +19,7 @@ import (
     "fmt"
     "encoding/json"
     "io/ioutil"
+    "net/http"
 )
 
 // Config
@@ -28,6 +29,7 @@ type Config struct {
     AccessToken string
     AccessSecret string
     Debug bool
+    CustomHttpClient *http.Client
 }
 
 // List of required configuration keys
@@ -87,6 +89,12 @@ func ReadConfig(fn string) (settings *Config) {
     }
 
     return NewConfig(config)
+}
+
+// Configure for usage with custom http client
+func (cfg *Config) SetCustomHttpClient(c *http.Client) *Config {
+    cfg.CustomHttpClient = c
+    return cfg
 }
 
 // Test print of found/assigned key

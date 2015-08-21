@@ -49,15 +49,8 @@ type ApiClient struct {
 // Setup client using specific config
 func Setup(config *Config) (client ApiClient) {
     var c ApiClient
-    c.client = oauth.NewConsumer(
-        config.ConsumerKey,
-        config.ConsumerSecret,
-        oauth.ServiceProvider{
-            RequestTokenUrl:   RequestTokenEP,
-            AuthorizeTokenUrl: AuthorizationEP,
-            AccessTokenUrl:    AccessTokenEP,
-            HttpMethod:    "POST",
-        })
+
+    c.client = setupNewConsumer(config, config.CustomHttpClient)
 
     if config.Debug {
         c.client.Debug(true)
@@ -69,6 +62,31 @@ func Setup(config *Config) (client ApiClient) {
     }
     
     return c
+}
+
+// Create new OAuth consumer, based on setup config and possibly a custom http client
+func setupNewConsumer(config *Config, httpClient *http.Client) *oauth.Consumer {
+    if (httpClient == nil) {
+        return oauth.NewConsumer(
+                config.ConsumerKey,
+                config.ConsumerSecret,
+                oauth.ServiceProvider{
+                    RequestTokenUrl:   RequestTokenEP,
+                    AuthorizeTokenUrl: AuthorizationEP,
+                    AccessTokenUrl:    AccessTokenEP,
+                    HttpMethod:    "POST",
+                })
+    } else {
+        return oauth.NewCustomHttpClientConsumer(
+                config.ConsumerKey,
+                config.ConsumerSecret,
+                oauth.ServiceProvider{
+                    RequestTokenUrl:   RequestTokenEP,
+                    AuthorizeTokenUrl: AuthorizationEP,
+                    AccessTokenUrl:    AccessTokenEP,
+                    HttpMethod:    "POST",
+                }, httpClient)
+    }
 }
 
 // Set entry point, e.g requested from a router
