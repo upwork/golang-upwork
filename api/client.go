@@ -64,31 +64,6 @@ func Setup(config *Config) (client ApiClient) {
     return c
 }
 
-// Create new OAuth consumer, based on setup config and possibly a custom http client
-func setupNewConsumer(config *Config, httpClient *http.Client) *oauth.Consumer {
-    if (httpClient == nil) {
-        return oauth.NewConsumer(
-                config.ConsumerKey,
-                config.ConsumerSecret,
-                oauth.ServiceProvider{
-                    RequestTokenUrl:   RequestTokenEP,
-                    AuthorizeTokenUrl: AuthorizationEP,
-                    AccessTokenUrl:    AccessTokenEP,
-                    HttpMethod:    "POST",
-                })
-    } else {
-        return oauth.NewCustomHttpClientConsumer(
-                config.ConsumerKey,
-                config.ConsumerSecret,
-                oauth.ServiceProvider{
-                    RequestTokenUrl:   RequestTokenEP,
-                    AuthorizeTokenUrl: AuthorizationEP,
-                    AccessTokenUrl:    AccessTokenEP,
-                    HttpMethod:    "POST",
-                }, httpClient)
-    }
-}
-
 // Set entry point, e.g requested from a router
 func (c *ApiClient) SetEntryPoint(ep string) {
     c.ep = ep
@@ -192,6 +167,31 @@ func (c *ApiClient) sendPostRequest(uri string, params map[string]string) (r *ht
     response, err := c.oclient.Post(formatUri(uri, c.ep), "application/json", bytes.NewBuffer(jsonStr))
 
     return formatResponse(response, err)
+}
+
+// Create new OAuth consumer, based on setup config and possibly a custom http client
+func setupNewConsumer(config *Config, httpClient *http.Client) *oauth.Consumer {
+    if (httpClient == nil) {
+        return oauth.NewConsumer(
+                config.ConsumerKey,
+                config.ConsumerSecret,
+                oauth.ServiceProvider{
+                    RequestTokenUrl:   RequestTokenEP,
+                    AuthorizeTokenUrl: AuthorizationEP,
+                    AccessTokenUrl:    AccessTokenEP,
+                    HttpMethod:    "POST",
+                })
+    } else {
+        return oauth.NewCustomHttpClientConsumer(
+                config.ConsumerKey,
+                config.ConsumerSecret,
+                oauth.ServiceProvider{
+                    RequestTokenUrl:   RequestTokenEP,
+                    AuthorizeTokenUrl: AuthorizationEP,
+                    AccessTokenUrl:    AccessTokenEP,
+                    HttpMethod:    "POST",
+                }, httpClient)
+    }
 }
 
 // Check and format (preparate a byte body) http response routine
