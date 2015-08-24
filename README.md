@@ -3,6 +3,7 @@ GO bindings for Upwork API
 
 [![License](http://img.shields.io/packagist/l/upwork/php-upwork.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![GitHub release](https://img.shields.io/github/release/upwork/golang-upwork.svg)](https://github.com/upwork/golang-upwork/releases)
+[![Build status](https://travis-ci.org/upwork/golang-upwork.svg)](http://travis-ci.org/upwork/golang-upwork)
 
 # Introduction
 This project provides a set of resources of Upwork API from http://developers.upwork.com
