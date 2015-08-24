@@ -38,22 +38,22 @@ func New(c api.ApiClient) (a) {
 
 // Generate Time Reports for a Specific Team (with financial info)
 func (r a) GetByTeamFull(company string, team string, params map[string]string) (*http.Response, []byte) {
-    return getByType(company, team, "", params, false)
+    return r.getByType(company, team, "", params, false)
 }
 
 // Generate Time Reports for a Specific Team (hide financial info)
 func (r a) GetByTeamFullLimited(company string, team string, params map[string]string) (*http.Response, []byte) {
-    return getByType(company, team, "", params, true)
+    return r.getByType(company, team, "", params, true)
 }
 
 // Generating Agency Specific Reports
 func (r a) GetByAgency(company string, agency string, params map[string]string) (*http.Response, []byte) {
-    return getByType(company, "", agency, params, false)
+    return r.getByType(company, "", agency, params, false)
 }
 
 // Generating Company Wide Reports
 func (r a) GetByCompany(company string, params map[string]string) (*http.Response, []byte) {
-    return getByType(company, "", "", params, false)
+    return r.getByType(company, "", "", params, false)
 }
 
 // Generating Freelancer's Specific Reports (with financial info)
@@ -67,8 +67,7 @@ func (r a) GetByFreelancerLimited(freelancerId string, agency string, params map
 }
 
 // Get by type 
-func getByType(company string, team string, agency string, params map[string]string, hideFinDetails bool) (*http.Response, []byte) {
-    var r a
+func (r a) getByType(company string, team string, agency string, params map[string]string, hideFinDetails bool) (*http.Response, []byte) {
     url := ""
     if team != "" {
         url = "/teams/" + team
