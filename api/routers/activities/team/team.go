@@ -38,12 +38,12 @@ func New(c api.ApiClient) (a) {
 
 // List all oTask/Activity records within a team
 func (r a) GetList(company string, team string) (*http.Response, []byte) {
-    return getByType(company, team, "")
+    return r.getByType(company, team, "")
 }
 
 // List all oTask/Activity records within a team by specified code(s)
 func (r a) GetSpecificList(company string, team string, code string) (*http.Response, []byte) {
-    return getByType(company, team, code)
+    return r.getByType(company, team, code)
 }
 
 // Create an oTask/Activity record within a team
@@ -72,8 +72,7 @@ func (r a) UpdateBatch(company string, params map[string]string) (*http.Response
 }
 
 // Get by type 
-func getByType(company string, team string, code string) (*http.Response, []byte) {
-    var r a
+func (r a) getByType(company string, team string, code string) (*http.Response, []byte) {
     url := ""
     if code != "" {
         url = "/" + code;
