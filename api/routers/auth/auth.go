@@ -24,11 +24,11 @@ const (
 )
 
 type a struct {
-    client api.ApiClient
+    client *api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
+func New(c *api.ApiClient) (a) {
     var r a
     c.SetEntryPoint(EntryPoint)
     r.client = c
