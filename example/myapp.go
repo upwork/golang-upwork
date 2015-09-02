@@ -85,6 +85,6 @@ func main() {
     //params := make(map[string]string)
     //params["tq"] = "select memo where worked_on >= '05-08-2015'"
     //params["tqx"] = "out:json"
-    //_, jsonDataFromHttp4 := timereports.New(client).GetByFreelancerFull(params)
+    //_, jsonDataFromHttp4 := timereports.New(client).GetByFreelancerFull("freelancerid", "agency", params)
     //fmt.Println(string(jsonDataFromHttp4))
 }

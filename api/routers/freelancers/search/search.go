@@ -28,12 +28,9 @@ type a struct {
 }
 
 // Constructor
-func New(c *api.ApiClient) (a) {
-    var r a
+func New(c *api.ApiClient) *a {
     c.SetEntryPoint(EntryPoint)
-    r.client = c
-
-    return r
+    return &a{c}
 }
 
 // Search freelancers
