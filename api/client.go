@@ -120,7 +120,8 @@ func (c *ApiClient) Get(uri string, params map[string]string) (resp *http.Respon
         qstr = qstr[0:len(qstr)-1]
     }
     u := &url.URL{Path: qstr}
-    encQuery := u.String()
+    // https://github.com/mrjones/oauth/issues/34
+    encQuery := strings.Replace(u.String(), ";", "%3B", -1)
 
     response, err := c.oclient.Get(formatUri(uri, c.ep) + "?" + encQuery)
     
