@@ -15,33 +15,33 @@
 package roles
 
 import (
-    "net/http"
-    "github.com/upwork/golang-upwork/api"
+	"github.com/upwork/golang-upwork/api"
+	"net/http"
 )
 
 const (
-    EntryPoint = "api"
+	EntryPoint = "api"
 )
 
 type a struct {
-    client api.ApiClient
+	client api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
-    var r a
-    c.SetEntryPoint(EntryPoint)
-    r.client = c
+func New(c api.ApiClient) a {
+	var r a
+	c.SetEntryPoint(EntryPoint)
+	r.client = c
 
-    return r
+	return r
 }
 
 // Get user roles
 func (r a) GetAll() (*http.Response, []byte) {
-    return r.client.Get("/hr/v2/userroles", nil)
+	return r.client.Get("/hr/v2/userroles", nil)
 }
 
 // Get by specific user
 func (r a) GetBySpecificUser(reference string) (*http.Response, []byte) {
-    return r.client.Get("/hr/v2/userroles/" + reference, nil)
+	return r.client.Get("/hr/v2/userroles/"+reference, nil)
 }

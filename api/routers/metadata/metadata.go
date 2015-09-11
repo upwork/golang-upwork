@@ -15,53 +15,53 @@
 package metadata
 
 import (
-    "net/http"
-    "github.com/upwork/golang-upwork/api"
+	"github.com/upwork/golang-upwork/api"
+	"net/http"
 )
 
 const (
-    EntryPoint = "api"
+	EntryPoint = "api"
 )
 
 type a struct {
-    client api.ApiClient
+	client api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
-    var r a
-    c.SetEntryPoint(EntryPoint)
-    r.client = c
+func New(c api.ApiClient) a {
+	var r a
+	c.SetEntryPoint(EntryPoint)
+	r.client = c
 
-    return r
+	return r
 }
 
 // Get categories
 func (r a) GetCategories() (*http.Response, []byte) {
-    return r.client.Get("/profiles/v1/metadata/categories", nil)
+	return r.client.Get("/profiles/v1/metadata/categories", nil)
 }
 
 // Get categories (V2)
 func (r a) GetCategoriesV2() (*http.Response, []byte) {
-    return r.client.Get("/profiles/v2/metadata/categories", nil)
+	return r.client.Get("/profiles/v2/metadata/categories", nil)
 }
 
 // Get skills
 func (r a) GetSkills() (*http.Response, []byte) {
-    return r.client.Get("/profiles/v1/metadata/skills", nil)
+	return r.client.Get("/profiles/v1/metadata/skills", nil)
 }
 
 // Get regions
 func (r a) GetRegions() (*http.Response, []byte) {
-    return r.client.Get("/profiles/v1/metadata/regions", nil)
+	return r.client.Get("/profiles/v1/metadata/regions", nil)
 }
 
 // Get tests
 func (r a) GetTests() (*http.Response, []byte) {
-    return r.client.Get("/profiles/v1/metadata/tests", nil)
+	return r.client.Get("/profiles/v1/metadata/tests", nil)
 }
 
 // Get reasons
 func (r a) GetReasons(params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/profiles/v1/metadata/reasons", params)
+	return r.client.Get("/profiles/v1/metadata/reasons", params)
 }

@@ -15,48 +15,48 @@
 package billings
 
 import (
-    "net/http"
-    "github.com/upwork/golang-upwork/api"
+	"github.com/upwork/golang-upwork/api"
+	"net/http"
 )
 
 const (
-    EntryPoint = "gds"
+	EntryPoint = "gds"
 )
 
 type a struct {
-    client api.ApiClient
+	client api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
-    var r a
-    c.SetEntryPoint(EntryPoint)
-    r.client = c
+func New(c api.ApiClient) a {
+	var r a
+	c.SetEntryPoint(EntryPoint)
+	r.client = c
 
-    return r
+	return r
 }
 
 // Generate Billing Reports for a Specific Freelancer
 func (r a) GetByFreelancer(freelancerReference string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/finreports/v2/providers/" + freelancerReference + "/billings", params)
+	return r.client.Get("/finreports/v2/providers/"+freelancerReference+"/billings", params)
 }
 
 // Generate Billing Reports for a Specific Freelancer's Team
 func (r a) GetByFreelancersTeam(freelancerTeamReference string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/finreports/v2/provider_teams/" + freelancerTeamReference + "/billings", params)
+	return r.client.Get("/finreports/v2/provider_teams/"+freelancerTeamReference+"/billings", params)
 }
 
 // Generate Billing Reports for a Specific Freelancer's Company
 func (r a) GetByFreelancersCompany(freelancerCompanyReference string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/finreports/v2/provider_companies/" + freelancerCompanyReference + "/billings", params)
+	return r.client.Get("/finreports/v2/provider_companies/"+freelancerCompanyReference+"/billings", params)
 }
 
 // Generate Billing Reports for a Specific Buyer's Team
 func (r a) GetByBuyersTeam(buyerTeamReference string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/finreports/v2/buyer_teams/" + buyerTeamReference + "/billings", params)
+	return r.client.Get("/finreports/v2/buyer_teams/"+buyerTeamReference+"/billings", params)
 }
 
 // Generate Billing Reports for a Specific Buyer's Company
 func (r a) GetByBuyersCompany(buyerCompanyReference string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/finreports/v2/buyer_companies/" + buyerCompanyReference + "/billings", params)
+	return r.client.Get("/finreports/v2/buyer_companies/"+buyerCompanyReference+"/billings", params)
 }

@@ -15,68 +15,68 @@
 package team
 
 import (
-    "net/http"
-    "github.com/upwork/golang-upwork/api"
+	"github.com/upwork/golang-upwork/api"
+	"net/http"
 )
 
 const (
-    EntryPoint = "api"
+	EntryPoint = "api"
 )
 
 type a struct {
-    client api.ApiClient
+	client api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
-    var r a
-    c.SetEntryPoint(EntryPoint)
-    r.client = c
+func New(c api.ApiClient) a {
+	var r a
+	c.SetEntryPoint(EntryPoint)
+	r.client = c
 
-    return r
+	return r
 }
 
 // List all oTask/Activity records within a team
 func (r a) GetList(company string, team string) (*http.Response, []byte) {
-    return r.getByType(company, team, "")
+	return r.getByType(company, team, "")
 }
 
 // List all oTask/Activity records within a team by specified code(s)
 func (r a) GetSpecificList(company string, team string, code string) (*http.Response, []byte) {
-    return r.getByType(company, team, code)
+	return r.getByType(company, team, code)
 }
 
 // Create an oTask/Activity record within a team
 func (r a) AddActivity(company string, team string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Post("/otask/v1/tasks/companies/" + company + "/teams/" + team + "/tasks", params)
+	return r.client.Post("/otask/v1/tasks/companies/"+company+"/teams/"+team+"/tasks", params)
 }
 
 // Update specific oTask/Activity record within a team
 func (r a) UpdateActivity(company string, team string, code string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Put("/otask/v1/tasks/companies/" + company + "/teams/" + team + "/tasks/" + code, params)
+	return r.client.Put("/otask/v1/tasks/companies/"+company+"/teams/"+team+"/tasks/"+code, params)
 }
 
 // Archive specific oTask/Activity record within a team
 func (r a) ArchiveActivity(company string, team string, code string) (*http.Response, []byte) {
-    return r.client.Put("/otask/v1/tasks/companies/" + company + "/teams/" + team + "/archive/" + code, nil)
+	return r.client.Put("/otask/v1/tasks/companies/"+company+"/teams/"+team+"/archive/"+code, nil)
 }
 
 // Unarchive specific oTask/Activity record within a team
 func (r a) UnarchiveActivity(company string, team string, code string) (*http.Response, []byte) {
-    return r.client.Put("/otask/v1/tasks/companies/" + company + "/teams/" + team + "/unarchive/" + code, nil)
+	return r.client.Put("/otask/v1/tasks/companies/"+company+"/teams/"+team+"/unarchive/"+code, nil)
 }
 
 // Update a group of oTask/Activity records
 func (r a) UpdateBatch(company string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Put("/otask/v1/tasks/companies/" + company + "/tasks/batch", params)
+	return r.client.Put("/otask/v1/tasks/companies/"+company+"/tasks/batch", params)
 }
 
-// Get by type 
+// Get by type
 func (r a) getByType(company string, team string, code string) (*http.Response, []byte) {
-    url := ""
-    if code != "" {
-        url = "/" + code;
-    }
+	url := ""
+	if code != "" {
+		url = "/" + code
+	}
 
-    return r.client.Get("/otask/v1/tasks/companies/" + company + "/teams/" + team + "/tasks" + url, nil)
+	return r.client.Get("/otask/v1/tasks/companies/"+company+"/teams/"+team+"/tasks"+url, nil)
 }

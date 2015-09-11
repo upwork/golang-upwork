@@ -15,33 +15,33 @@
 package teams
 
 import (
-    "net/http"
-    "github.com/upwork/golang-upwork/api"
+	"github.com/upwork/golang-upwork/api"
+	"net/http"
 )
 
 const (
-    EntryPoint = "api"
+	EntryPoint = "api"
 )
 
 type a struct {
-    client api.ApiClient
+	client api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
-    var r a
-    c.SetEntryPoint(EntryPoint)
-    r.client = c
+func New(c api.ApiClient) a {
+	var r a
+	c.SetEntryPoint(EntryPoint)
+	r.client = c
 
-    return r
+	return r
 }
 
 // Get Teams info
 func (r a) GetList() (*http.Response, []byte) {
-    return r.client.Get("/hr/v2/teams", nil)
+	return r.client.Get("/hr/v2/teams", nil)
 }
 
 // Get Users in Team
 func (r a) GetUsersInTeam(teamReference string) (*http.Response, []byte) {
-    return r.client.Get("/hr/v2/teams/" + teamReference + "/users", nil)
+	return r.client.Get("/hr/v2/teams/"+teamReference+"/users", nil)
 }

@@ -15,33 +15,33 @@
 package workdays
 
 import (
-    "net/http"
-    "github.com/upwork/golang-upwork/api"
+	"github.com/upwork/golang-upwork/api"
+	"net/http"
 )
 
 const (
-    EntryPoint = "api"
+	EntryPoint = "api"
 )
 
 type a struct {
-    client api.ApiClient
+	client api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
-    var r a
-    c.SetEntryPoint(EntryPoint)
-    r.client = c
+func New(c api.ApiClient) a {
+	var r a
+	c.SetEntryPoint(EntryPoint)
+	r.client = c
 
-    return r
+	return r
 }
 
 // Get Workdays by Company
 func (r a) GetByCompany(company string, fromDate string, tillDate string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/team/v2/workdays/companies/" + company + "/" + fromDate + "," + tillDate, params)
+	return r.client.Get("/team/v2/workdays/companies/"+company+"/"+fromDate+","+tillDate, params)
 }
 
 // Get Workdays by Contract
 func (r a) GetByContract(contract string, fromDate string, tillDate string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/team/v2/workdays/contracts/" + contract + "/" + fromDate + "," + tillDate, params)
+	return r.client.Get("/team/v2/workdays/contracts/"+contract+"/"+fromDate+","+tillDate, params)
 }

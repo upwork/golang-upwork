@@ -15,38 +15,38 @@
 package contracts
 
 import (
-    "net/http"
-    "github.com/upwork/golang-upwork/api"
+	"github.com/upwork/golang-upwork/api"
+	"net/http"
 )
 
 const (
-    EntryPoint = "api"
+	EntryPoint = "api"
 )
 
 type a struct {
-    client api.ApiClient
+	client api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
-    var r a
-    c.SetEntryPoint(EntryPoint)
-    r.client = c
+func New(c api.ApiClient) a {
+	var r a
+	c.SetEntryPoint(EntryPoint)
+	r.client = c
 
-    return r
+	return r
 }
 
 // Suspend Contract
 func (r a) SuspendContract(reference string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Put("/hr/v2/contracts/" + reference + "/suspend", params)
+	return r.client.Put("/hr/v2/contracts/"+reference+"/suspend", params)
 }
 
 // Restart Contract
 func (r a) RestartContract(reference string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Put("/hr/v2/contracts/" + reference + "/restart", params)
+	return r.client.Put("/hr/v2/contracts/"+reference+"/restart", params)
 }
 
 // End Contract
 func (r a) EndContract(reference string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Delete("/hr/v2/contracts/" + reference, params)
+	return r.client.Delete("/hr/v2/contracts/"+reference, params)
 }

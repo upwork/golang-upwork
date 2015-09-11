@@ -15,33 +15,33 @@
 package engagement
 
 import (
-    "net/http"
-    "github.com/upwork/golang-upwork/api"
+	"github.com/upwork/golang-upwork/api"
+	"net/http"
 )
 
 const (
-    EntryPoint = "api"
+	EntryPoint = "api"
 )
 
 type a struct {
-    client api.ApiClient
+	client api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
-    var r a
-    c.SetEntryPoint(EntryPoint)
-    r.client = c
+func New(c api.ApiClient) a {
+	var r a
+	c.SetEntryPoint(EntryPoint)
+	r.client = c
 
-    return r
+	return r
 }
 
 // List activities for specific engagement
 func (r a) GetSpecific(engagementRef string) (*http.Response, []byte) {
-    return r.client.Get("/tasks/v2/tasks/contracts/" + engagementRef, nil)
+	return r.client.Get("/tasks/v2/tasks/contracts/"+engagementRef, nil)
 }
 
 // Assign engagements to the list of activities
 func (r a) Assign(company string, team string, engagement string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Put("/otask/v1/tasks/companies/" + company + "/teams/" + team + "/engagements/" + engagement + "/tasks", params)
+	return r.client.Put("/otask/v1/tasks/companies/"+company+"/teams/"+team+"/engagements/"+engagement+"/tasks", params)
 }
