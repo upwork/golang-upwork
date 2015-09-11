@@ -15,38 +15,38 @@
 package submissions
 
 import (
-    "net/http"
-    "github.com/upwork/golang-upwork/api"
+	"github.com/upwork/golang-upwork/api"
+	"net/http"
 )
 
 const (
-    EntryPoint = "api"
+	EntryPoint = "api"
 )
 
 type a struct {
-    client api.ApiClient
+	client api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
-    var r a
-    c.SetEntryPoint(EntryPoint)
-    r.client = c
+func New(c api.ApiClient) a {
+	var r a
+	c.SetEntryPoint(EntryPoint)
+	r.client = c
 
-    return r
+	return r
 }
 
 // Freelancer submits work for the client to approve
 func (r a) RequestApproval(params map[string]string) (*http.Response, []byte) {
-    return r.client.Post("/hr/v3/fp/submissions", params)
+	return r.client.Post("/hr/v3/fp/submissions", params)
 }
 
 // Approve an existing Submission
 func (r a) Approve(submissionId string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Put("/hr/v3/fp/submissions/" + submissionId + "/approve", params)
+	return r.client.Put("/hr/v3/fp/submissions/"+submissionId+"/approve", params)
 }
 
 // Reject an existing Submission
 func (r a) Reject(submissionId string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Put("/hr/v3/fp/submissions/" + submissionId + "/reject", params)
+	return r.client.Put("/hr/v3/fp/submissions/"+submissionId+"/reject", params)
 }

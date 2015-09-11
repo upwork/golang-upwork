@@ -15,58 +15,58 @@
 package milestones
 
 import (
-    "net/http"
-    "github.com/upwork/golang-upwork/api"
+	"github.com/upwork/golang-upwork/api"
+	"net/http"
 )
 
 const (
-    EntryPoint = "api"
+	EntryPoint = "api"
 )
 
 type a struct {
-    client api.ApiClient
+	client api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
-    var r a
-    c.SetEntryPoint(EntryPoint)
-    r.client = c
+func New(c api.ApiClient) a {
+	var r a
+	c.SetEntryPoint(EntryPoint)
+	r.client = c
 
-    return r
+	return r
 }
 
 // Get active Milestone for the Contract
 func (r a) GetActiveMilestone(contractId string) (*http.Response, []byte) {
-    return r.client.Get("/hr/v3/fp/milestones/statuses/active/contracts/" + contractId, nil)
+	return r.client.Get("/hr/v3/fp/milestones/statuses/active/contracts/"+contractId, nil)
 }
 
 // Get all submissions for the active Milestone
 func (r a) GetSubmissions(milestoneId string) (*http.Response, []byte) {
-    return r.client.Get("/hr/v3/fp/milestones/" + milestoneId + "/submissions", nil)
+	return r.client.Get("/hr/v3/fp/milestones/"+milestoneId+"/submissions", nil)
 }
 
 // Create a new Milestone
 func (r a) Create(params map[string]string) (*http.Response, []byte) {
-    return r.client.Post("/hr/v3/fp/milestones", params)
+	return r.client.Post("/hr/v3/fp/milestones", params)
 }
 
 // Edit an existing Milestone
 func (r a) Edit(milestoneId string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Put("/hr/v3/fp/milestones/" + milestoneId, params)
+	return r.client.Put("/hr/v3/fp/milestones/"+milestoneId, params)
 }
 
 // Activate an existing Milestone
 func (r a) Activate(milestoneId string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Put("/hr/v3/fp/milestones/" + milestoneId + "/activate", params)
+	return r.client.Put("/hr/v3/fp/milestones/"+milestoneId+"/activate", params)
 }
 
 // Approve an existing Milestone
 func (r a) Approve(milestoneId string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Put("/hr/v3/fp/milestones/" + milestoneId + "/approve", params)
+	return r.client.Put("/hr/v3/fp/milestones/"+milestoneId+"/approve", params)
 }
 
 // Delete an existing Milestone
 func (r a) Delete(milestoneId string) (*http.Response, []byte) {
-    return r.client.Delete("/hr/v3/fp/milestones/" + milestoneId , nil)
+	return r.client.Delete("/hr/v3/fp/milestones/"+milestoneId, nil)
 }

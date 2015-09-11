@@ -15,38 +15,38 @@
 package offers
 
 import (
-    "net/http"
-    "github.com/upwork/golang-upwork/api"
+	"github.com/upwork/golang-upwork/api"
+	"net/http"
 )
 
 const (
-    EntryPoint = "api"
+	EntryPoint = "api"
 )
 
 type a struct {
-    client api.ApiClient
+	client api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
-    var r a
-    c.SetEntryPoint(EntryPoint)
-    r.client = c
+func New(c api.ApiClient) a {
+	var r a
+	c.SetEntryPoint(EntryPoint)
+	r.client = c
 
-    return r
+	return r
 }
 
 // Get list of offers
 func (r a) GetList(params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/offers/v1/contractors/offers", params)
+	return r.client.Get("/offers/v1/contractors/offers", params)
 }
 
 // Get specific offer
 func (r a) GetSpecific(reference string) (*http.Response, []byte) {
-    return r.client.Get("/offers/v1/contractors/offers/" + reference, nil)
+	return r.client.Get("/offers/v1/contractors/offers/"+reference, nil)
 }
 
 // Run a specific action
 func (r a) MakeOffer(reference string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Post("/offers/v1/contractors/offers/" + reference, params)
+	return r.client.Post("/offers/v1/contractors/offers/"+reference, params)
 }

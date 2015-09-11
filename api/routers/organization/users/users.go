@@ -15,33 +15,33 @@
 package users
 
 import (
-    "net/http"
-    "github.com/upwork/golang-upwork/api"
+	"github.com/upwork/golang-upwork/api"
+	"net/http"
 )
 
 const (
-    EntryPoint = "api"
+	EntryPoint = "api"
 )
 
 type a struct {
-    client api.ApiClient
+	client api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
-    var r a
-    c.SetEntryPoint(EntryPoint)
-    r.client = c
+func New(c api.ApiClient) a {
+	var r a
+	c.SetEntryPoint(EntryPoint)
+	r.client = c
 
-    return r
+	return r
 }
 
 // Get Auth User Info
 func (r a) GetMyInfo() (*http.Response, []byte) {
-    return r.client.Get("/hr/v2/users/me", nil)
+	return r.client.Get("/hr/v2/users/me", nil)
 }
 
 // Get Specific User Info
 func (r a) GetSpecific(userReference string) (*http.Response, []byte) {
-    return r.client.Get("/hr/v2/users/" + userReference, nil)
+	return r.client.Get("/hr/v2/users/"+userReference, nil)
 }

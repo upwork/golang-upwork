@@ -15,43 +15,43 @@
 package companies
 
 import (
-    "net/http"
-    "github.com/upwork/golang-upwork/api"
+	"github.com/upwork/golang-upwork/api"
+	"net/http"
 )
 
 const (
-    EntryPoint = "api"
+	EntryPoint = "api"
 )
 
 type a struct {
-    client api.ApiClient
+	client api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
-    var r a
-    c.SetEntryPoint(EntryPoint)
-    r.client = c
+func New(c api.ApiClient) a {
+	var r a
+	c.SetEntryPoint(EntryPoint)
+	r.client = c
 
-    return r
+	return r
 }
 
 // Get Companies List
 func (r a) GetList() (*http.Response, []byte) {
-    return r.client.Get("/hr/v2/companies", nil)
+	return r.client.Get("/hr/v2/companies", nil)
 }
 
 // Get Specific Company
 func (r a) GetSpecific(cmpReference string) (*http.Response, []byte) {
-    return r.client.Get("/hr/v2/companies/" + cmpReference, nil)
+	return r.client.Get("/hr/v2/companies/"+cmpReference, nil)
 }
 
 // Get Teams in Company
 func (r a) GetTeams(cmpReference string) (*http.Response, []byte) {
-    return r.client.Get("/hr/v2/companies/" + cmpReference + "/teams", nil)
+	return r.client.Get("/hr/v2/companies/"+cmpReference+"/teams", nil)
 }
 
 // Get Users in Company
 func (r a) GetUsers(cmpReference string) (*http.Response, []byte) {
-    return r.client.Get("/hr/v2/companies/" + cmpReference + "/users", nil)
+	return r.client.Get("/hr/v2/companies/"+cmpReference+"/users", nil)
 }

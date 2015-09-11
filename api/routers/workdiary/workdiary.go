@@ -15,33 +15,33 @@
 package workdiary
 
 import (
-    "net/http"
-    "github.com/upwork/golang-upwork/api"
+	"github.com/upwork/golang-upwork/api"
+	"net/http"
 )
 
 const (
-    EntryPoint = "api"
+	EntryPoint = "api"
 )
 
 type a struct {
-    client api.ApiClient
+	client api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
-    var r a
-    c.SetEntryPoint(EntryPoint)
-    r.client = c
+func New(c api.ApiClient) a {
+	var r a
+	c.SetEntryPoint(EntryPoint)
+	r.client = c
 
-    return r
+	return r
 }
 
 // Get Workdiary
 func (r a) Get(company string, username string, date string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/team/v1/workdiaries/" + company + "/" + username + "/" + date, params)
+	return r.client.Get("/team/v1/workdiaries/"+company+"/"+username+"/"+date, params)
 }
 
 // Get Workdiary by Contract
 func (r a) GetByContract(contract string, date string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/team/v2/workdiaries/contracts/" + contract + "/" + date, params)
+	return r.client.Get("/team/v2/workdiaries/contracts/"+contract+"/"+date, params)
 }

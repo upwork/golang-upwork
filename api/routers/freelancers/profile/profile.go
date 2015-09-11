@@ -15,33 +15,33 @@
 package profile
 
 import (
-    "net/http"
-    "github.com/upwork/golang-upwork/api"
+	"github.com/upwork/golang-upwork/api"
+	"net/http"
 )
 
 const (
-    EntryPoint = "api"
+	EntryPoint = "api"
 )
 
 type a struct {
-    client api.ApiClient
+	client api.ApiClient
 }
 
 // Constructor
-func New(c api.ApiClient) (a) {
-    var r a
-    c.SetEntryPoint(EntryPoint)
-    r.client = c
+func New(c api.ApiClient) a {
+	var r a
+	c.SetEntryPoint(EntryPoint)
+	r.client = c
 
-    return r
+	return r
 }
 
 // Get specific Freelancer's Profile
 func (r a) GetSpecific(key string) (*http.Response, []byte) {
-    return r.client.Get("/profiles/v1/providers/" + key, nil)
+	return r.client.Get("/profiles/v1/providers/"+key, nil)
 }
 
 // Get brief info for the specific Freelancer's Profile
 func (r a) GetSpecificBrief(key string) (*http.Response, []byte) {
-    return r.client.Get("/profiles/v1/providers/" + key + "/brief", nil)
+	return r.client.Get("/profiles/v1/providers/"+key+"/brief", nil)
 }
