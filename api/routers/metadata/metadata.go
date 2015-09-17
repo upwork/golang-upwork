@@ -36,11 +36,6 @@ func New(c api.ApiClient) (a) {
     return r
 }
 
-// Get categories
-func (r a) GetCategories() (*http.Response, []byte) {
-    return r.client.Get("/profiles/v1/metadata/categories", nil)
-}
-
 // Get categories (V2)
 func (r a) GetCategoriesV2() (*http.Response, []byte) {
     return r.client.Get("/profiles/v2/metadata/categories", nil)
