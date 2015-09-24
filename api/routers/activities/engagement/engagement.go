@@ -45,3 +45,8 @@ func (r a) GetSpecific(engagementRef string) (*http.Response, []byte) {
 func (r a) Assign(company string, team string, engagement string, params map[string]string) (*http.Response, []byte) {
     return r.client.Put("/otask/v1/tasks/companies/" + company + "/teams/" + team + "/engagements/" + engagement + "/tasks", params)
 }
+
+// Assign to specific engagement the list of activities
+func (r a) AssignToEngagement(engagementRef string, params map[string]string) (*http.Response, []byte) {
+    return r.client.Put("/tasks/v2/tasks/contracts/" + engagementRef, params)
+}
