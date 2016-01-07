@@ -37,8 +37,12 @@ func New(c api.ApiClient) (a) {
 }
 
 // Get Teams info
-func (r a) GetList() (*http.Response, []byte) {
-    return r.client.Get("/hr/v2/teams", nil)
+func (r a) GetList(params ...map[string]string) (*http.Response, []byte) {
+    var p map[string]string
+    if params != nil {
+	p = params[0]
+    }
+    return r.client.Get("/hr/v2/teams", p)
 }
 
 // Get Users in Team
