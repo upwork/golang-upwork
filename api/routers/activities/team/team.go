@@ -37,13 +37,21 @@ func New(c api.ApiClient) (a) {
 }
 
 // List all oTask/Activity records within a team
-func (r a) GetList(company string, team string) (*http.Response, []byte) {
-    return r.getByType(company, team, "")
+func (r a) GetList(company string, team string, params ...map[string]string) (*http.Response, []byte) {
+    var p map[string]string
+    if params != nil {
+	p = params[0]
+    }
+    return r.getByType(company, team, "", p)
 }
 
 // List all oTask/Activity records within a team by specified code(s)
-func (r a) GetSpecificList(company string, team string, code string) (*http.Response, []byte) {
-    return r.getByType(company, team, code)
+func (r a) GetSpecificList(company string, team string, code string, params ...map[string]string) (*http.Response, []byte) {
+    var p map[string]string
+    if params != nil {
+	p = params[0]
+    }
+    return r.getByType(company, team, code, p)
 }
 
 // Create an oTask/Activity record within a team
@@ -72,11 +80,11 @@ func (r a) UpdateBatch(company string, params map[string]string) (*http.Response
 }
 
 // Get by type 
-func (r a) getByType(company string, team string, code string) (*http.Response, []byte) {
+func (r a) getByType(company string, team string, code string, params map[string]string) (*http.Response, []byte) {
     url := ""
     if code != "" {
         url = "/" + code;
     }
 
-    return r.client.Get("/otask/v1/tasks/companies/" + company + "/teams/" + team + "/tasks" + url, nil)
+    return r.client.Get("/otask/v1/tasks/companies/" + company + "/teams/" + team + "/tasks" + url, params)
 }
