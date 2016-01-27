@@ -42,8 +42,12 @@ func (r a) GetTrays() (*http.Response, []byte) {
 }
 
 // Get tray by type
-func (r a) GetTrayByType(username string, tType string) (*http.Response, []byte) {
-    return r.client.Get("/mc/v1/trays/" + username + "/" + tType, nil)
+func (r a) GetTrayByType(username string, tType string, params ...map[string]string) (*http.Response, []byte) {
+    var p map[string]string
+    if params != nil {
+	p = params[0]
+    }
+    return r.client.Get("/mc/v1/trays/" + username + "/" + tType, p)
 }
 
 // List thread details based on thread id
