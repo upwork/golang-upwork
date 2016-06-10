@@ -1,3 +1,7 @@
+## 1.2.0
+* Added Messages API (new)
+* Message API (V1) is now fully depricated
+
 ## 1.1.1
 * Add optional parameter to support pagination in GetTrayByType
 
