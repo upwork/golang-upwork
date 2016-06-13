@@ -36,9 +36,9 @@ func New(c api.ApiClient) (a) {
     return r
 }
 
-// Retrive rooms information
-func (r a) GetRooms(company string) (*http.Response, []byte) {
-    return r.client.Get("/messages/v3/" + company + "/rooms", nil)
+// Retrieve rooms information
+func (r a) GetRooms(company string, params map[string]string) (*http.Response, []byte) {
+    return r.client.Get("/messages/v3/" + company + "/rooms", params)
 }
 
 // Get a specific room information
