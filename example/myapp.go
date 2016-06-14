@@ -68,19 +68,6 @@ func main() {
     // here you can Unmarshal received json string, or do any other action(s)
     fmt.Println(string(jsonDataFromHttp1))
 
-    // run a post request using parameters as an example
-    //params := make(map[string]string)
-    //params["subject"] = "test subj"
-    //params["body"] = "test body"
-    //_, jsonDataFromHttp2 := mc.New(client).ReplyToThread("username", "12345", params)
-    //fmt.Println(string(jsonDataFromHttp2))
-    
-    // example of another request
-    //params1 := make(map[string]string)
-    //params1["read"] = "true"
-    //_, jsonDataFromHttp3 := mc.New(client).MarkThread("username", "12345", params1)
-    //fmt.Println(string(jsonDataFromHttp3))
-    
     // getting reports example
     //params := make(map[string]string)
     //params["tq"] = "select memo where worked_on >= '05-08-2015'"
