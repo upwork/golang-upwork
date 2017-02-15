@@ -38,10 +38,10 @@ func New(c api.ApiClient) (a) {
 
 // Get list of applications
 func (r a) GetList(params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/hr/v3/contractors/applications", params)
+    return r.client.Get("/hr/v4/contractors/applications", params)
 }
 
 // Get specific application
 func (r a) GetSpecific(reference string) (*http.Response, []byte) {
-    return r.client.Get("/hr/v3/contractors/applications/" + reference, nil)
+    return r.client.Get("/hr/v4/contractors/applications/" + reference, nil)
 }
