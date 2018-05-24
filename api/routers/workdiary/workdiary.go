@@ -37,11 +37,11 @@ func New(c api.ApiClient) (a) {
 }
 
 // Get Workdiary
-func (r a) Get(company string, username string, date string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/team/v1/workdiaries/" + company + "/" + username + "/" + date, params)
+func (r a) Get(company string, date string, params map[string]string) (*http.Response, []byte) {
+    return r.client.Get("/team/v3/workdiaries/companies/" + company + "/" + date, params)
 }
 
 // Get Workdiary by Contract
 func (r a) GetByContract(contract string, date string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/team/v2/workdiaries/contracts/" + contract + "/" + date, params)
+    return r.client.Get("/team/v3/workdiaries/contracts/" + contract + "/" + date, params)
 }
