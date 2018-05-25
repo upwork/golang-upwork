@@ -38,10 +38,10 @@ func New(c api.ApiClient) (a) {
 
 // Get Workdays by Company
 func (r a) GetByCompany(company string, fromDate string, tillDate string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/team/v2/workdays/companies/" + company + "/" + fromDate + "," + tillDate, params)
+    return r.client.Get("/team/v3/workdays/companies/" + company + "/" + fromDate + "," + tillDate, params)
 }
 
 // Get Workdays by Contract
 func (r a) GetByContract(contract string, fromDate string, tillDate string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/team/v2/workdays/contracts/" + contract + "/" + fromDate + "," + tillDate, params)
+    return r.client.Get("/team/v3/workdays/contracts/" + contract + "/" + fromDate + "," + tillDate, params)
 }
