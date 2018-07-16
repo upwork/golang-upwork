@@ -36,11 +36,6 @@ func New(c api.ApiClient) (a) {
     return r
 }
 
-// Generate Financial Reports for an owned Account
-func (r a) GetOwned(freelancerReference string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/finreports/v2/financial_account_owner/" + freelancerReference, params)
-}
-
 // Generate Financial Reports for a Specific Account
 func (r a) GetSpecific(entityReference string, params map[string]string) (*http.Response, []byte) {
     return r.client.Get("/finreports/v2/financial_accounts/" + entityReference, params)

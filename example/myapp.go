@@ -19,7 +19,7 @@ import (
     "bufio"
     "os"
     //"net/http" //uncomment if you need to setup a custom http client
-    
+
     "github.com/upwork/golang-upwork/api"
     "github.com/upwork/golang-upwork/api/routers/auth"
     //"github.com/upwork/golang-upwork/api/routers/mc" // uncomment to test mc examples
@@ -45,7 +45,7 @@ func main() {
     config.SetCustomHttpClient(c)
     client := api.Setup(config)
 */
-    
+
     client := api.Setup(api.ReadConfig(cfgFile))
     // we need an access token/secret pair in case we haven't received it yet
     if !client.HasAccessToken() {
@@ -64,7 +64,7 @@ func main() {
 
     // http.Response and []byte will be return, you can use any
     _, jsonDataFromHttp1 := auth.New(client).GetUserInfo()
-    
+
     // here you can Unmarshal received json string, or do any other action(s)
     fmt.Println(string(jsonDataFromHttp1))
 

@@ -41,16 +41,6 @@ func (r a) GetByFreelancer(freelancerReference string, params map[string]string)
     return r.client.Get("/finreports/v2/providers/" + freelancerReference + "/earnings", params)
 }
 
-// Generate Earning Reports for a Specific Freelancer's Team
-func (r a) GetByFreelancersTeam(freelancerTeamReference string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/finreports/v2/provider_teams/" + freelancerTeamReference + "/earnings", params)
-}
-
-// Generate Earning Reports for a Specific Freelancer's Company
-func (r a) GetByFreelancersCompany(freelancerCompanyReference string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/finreports/v2/provider_companies/" + freelancerCompanyReference + "/earnings", params)
-}
-
 // Generate Earning Reports for a Specific Buyer's Team
 func (r a) GetByBuyersTeam(buyerTeamReference string, params map[string]string) (*http.Response, []byte) {
     return r.client.Get("/finreports/v2/buyer_teams/" + buyerTeamReference + "/earnings", params)
