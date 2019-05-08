@@ -22,8 +22,8 @@ import (
     "net/http"
     "net/url"
     "io/ioutil"
-    
-	"github.com/mnovozhylov/oauth" // this is a forked dependency, to avoid unexpected behavior because of any changes
+
+    "github.com/mnovozhylov/oauth" // this is a forked dependency, to avoid unexpected behavior because of any changes
 )
 
 // Define end points
@@ -60,7 +60,7 @@ func Setup(config *Config) (client ApiClient) {
         Token: config.AccessToken,
         Secret: config.AccessSecret,
     }
-    
+
     return c
 }
 
@@ -119,12 +119,13 @@ func (c *ApiClient) Get(uri string, params map[string]string) (resp *http.Respon
         }
         qstr = qstr[0:len(qstr)-1]
     }
-    u := &url.URL{Path: qstr}
+    u := &url.URL{RawQuery: qstr}
+
     // https://github.com/mrjones/oauth/issues/34
     encQuery := strings.Replace(u.String(), ";", "%3B", -1)
 
-    response, err := c.oclient.Get(formatUri(uri, c.ep) + "?" + encQuery)
-    
+    response, err := c.oclient.Get(formatUri(uri, c.ep) + encQuery)
+
     return formatResponse(response, err)
 }
 
@@ -200,7 +201,7 @@ func formatResponse(resp *http.Response, err error) (r *http.Response, rb []byte
     if err != nil {
         log.Fatal("Can not execute the request, " + err.Error())
     }
-    
+
     defer resp.Body.Close()
     if resp.StatusCode != 200 {
         // do not exit, it can be a normal response
@@ -208,7 +209,7 @@ func formatResponse(resp *http.Response, err error) (r *http.Response, rb []byte
     }
     // read json http response
     jsonDataFromHttp, _ := ioutil.ReadAll(resp.Body)
-    
+
     return resp, jsonDataFromHttp
 }
 
