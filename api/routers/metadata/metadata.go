@@ -46,6 +46,16 @@ func (r a) GetSkills() (*http.Response, []byte) {
     return r.client.Get("/profiles/v1/metadata/skills", nil)
 }
 
+// Get skills (V2)
+func (r a) GetSkillsV2() (*http.Response, []byte) {
+    return r.client.Get("/profiles/v2/metadata/skills", nil)
+}
+
+// Get specialties
+func (r a) GetSpecialties() (*http.Response, []byte) {
+    return r.client.Get("/profiles/v1/metadata/specialties", nil)
+}
+
 // Get regions
 func (r a) GetRegions() (*http.Response, []byte) {
     return r.client.Get("/profiles/v1/metadata/regions", nil)
