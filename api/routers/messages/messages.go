@@ -48,7 +48,7 @@ func (r a) GetRoomDetails(company string, roomId string, params map[string]strin
 
 // Get messages from a specific room
 func (r a) GetRoomMessages(company string, roomId string, params map[string]string) (*http.Response, []byte) {
-    return r.client.Get("/messages/v3/" + company + "/rooms/" + roomId + '/stories', params)
+    return r.client.Get("/messages/v3/" + company + "/rooms/" + roomId + "/stories", params)
 }
 
 // Get a specific room by offer ID
