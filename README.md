@@ -1,7 +1,7 @@
-GO bindings for Upwork API
+GO bindings for Upwork API (OAuth1)
 ============
 
-[![License](http://img.shields.io/packagist/l/upwork/php-upwork.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![License](https://img.shields.io/github/license/upwork/golang-upwork)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![GitHub release](https://img.shields.io/github/release/upwork/golang-upwork.svg)](https://github.com/upwork/golang-upwork/releases)
 [![Build status](https://travis-ci.org/upwork/golang-upwork.svg)](http://travis-ci.org/upwork/golang-upwork)
 
