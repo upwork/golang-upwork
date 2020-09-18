@@ -46,6 +46,11 @@ func (r a) GetRoomDetails(company string, roomId string, params map[string]strin
     return r.client.Get("/messages/v3/" + company + "/rooms/" + roomId, params)
 }
 
+// Get messages from a specific room
+func (r a) GetRoomMessages(company string, roomId string, params map[string]string) (*http.Response, []byte) {
+    return r.client.Get("/messages/v3/" + company + "/rooms/" + roomId + "/stories", params)
+}
+
 // Get a specific room by offer ID
 func (r a) GetRoomByOffer(company string, offerId string, params map[string]string) (*http.Response, []byte) {
     return r.client.Get("/messages/v3/" + company + "/rooms/offers/" + offerId, params)
@@ -69,6 +74,11 @@ func (r a) CreateRoom(company string, params map[string]string) (*http.Response,
 // Send a message to a room
 func (r a) SendMessageToRoom(company string, roomId string, params map[string]string) (*http.Response, []byte) {
     return r.client.Post("/messages/v3/" + company + "/rooms/" + roomId + "/stories", params)
+}
+
+// Send a message to a batch of rooms
+func (r a) SendMessageToRooms(company string, params map[string]string) (*http.Response, []byte) {
+    return r.client.Post("/messages/v3/" + company + "/stories/batch", params)
 }
 
 // Update a room settings
