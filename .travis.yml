@@ -1,7 +1,7 @@
 language: go
 go:
-  - 1.12
-  - 1.11
+  - 1.15
+  - 1.14
   - tip
 script:
   - go test -v ./...
