@@ -125,7 +125,7 @@ func (c *ApiClient) Get(uri string, params map[string]string) (resp *http.Respon
 
     // https://github.com/mrjones/oauth/issues/34
     encQuery := strings.Replace(u.String(), ";", "%3B", -1)
-    encQuery = strings.Replace(encQuery, "./", "?", 1) // see Replace method to understand when "./" is returned
+    encQuery = strings.Replace(encQuery, "./", "?", 1) // see URL.String method to understand when "./" is returned
 
     // non-empty string may miss "?"
     if encQuery[:1] != "?" {
