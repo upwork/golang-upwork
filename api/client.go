@@ -128,7 +128,7 @@ func (c *ApiClient) Get(uri string, params map[string]string) (resp *http.Respon
     encQuery = strings.Replace(encQuery, "./", "?", 1) // see URL.String method to understand when "./" is returned
 
     // non-empty string may miss "?"
-    if encQuery[:1] != "?" {
+    if encQuery !="" && encQuery[:1] != "?" {
         encQuery = "?" + encQuery
     }
 
