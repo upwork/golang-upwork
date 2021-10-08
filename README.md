@@ -3,7 +3,7 @@ GO bindings for Upwork API (OAuth1)
 
 [![License](https://img.shields.io/github/license/upwork/golang-upwork)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![GitHub release](https://img.shields.io/github/release/upwork/golang-upwork.svg)](https://github.com/upwork/golang-upwork/releases)
-[![Build status](https://travis-ci.org/upwork/golang-upwork.svg)](http://travis-ci.org/upwork/golang-upwork)
+[![Build status](https://github.com/upwork/golang-upwork/workflows/build/badge.svg)](https://github.com/upwork/golang-upwork-oauth2/actions)
 
 # Introduction
 This project provides a set of resources of Upwork API from http://developers.upwork.com

@@ -1,0 +1,43 @@
+name: build
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  test:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        go: [ '1.14', '1.15' ]
+
+    steps:
+
+      # step 1: set up go
+      - name: Set up GO
+        uses: actions/setup-go@v1
+        with:
+          go-version: ${{ matrix.go }}
+
+      # step 2: checkout repository code
+      - name: Checkout code into workspace directory
+        uses: actions/checkout@v2
+
+      # step 3: install dependencies
+      - name: Install all Go dependencies
+        run: |
+          go get github.com/mnovozhylov/oauth &&
+          go get github.com/stretchr/testify/assert &&
+          go get github.com/upwork/golang-upwork/api
+
+      # step 4: run test
+      - name: go test
+        run: |
+          go test -v ./...
